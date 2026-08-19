@@ -1,3 +1,19 @@
 :root {
-  
+  --color-background: #0f1115;
+  --color-surface: #171a21;
+  --color-surface-hover: #1d2129;
+  --color-border: #292e38;
+
+  --color-primary: #8b5cf6;
+  --color-primary-hover: #7c3aed;
+
+  --color-text: #f5f5f5;
+  --color-text-secondary: #9ca3af;
+  --color-text-muted: #6b7280;
+
+  --container-width: 1400px;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
 }

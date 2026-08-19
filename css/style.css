@@ -1,0 +1,23 @@
+/* =================================
+   Global styles
+================================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 1200px;
+
+  background-color: var(--color-background);
+  color: var(--color-text);
+
+  font-family: "Inter", sans-serif;
+  line-height: 1.5;
+}
+
+button {
+  font: inherit;
+}
