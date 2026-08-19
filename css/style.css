@@ -72,7 +72,8 @@ button {
 
   transition: 0.2s;
   cursor: pointer;
-}.header-elements-container button:hover {
+}
+.header-elements-container button:hover {
   background-color: var(--color-surface-hover);
   border-color: #3b4250;
 }
@@ -96,4 +97,90 @@ button {
   width: 19px;
 
   border-radius: 50%;
+}
+
+/* =================================
+  Loader spinner
+================================= */
+
+.loader-parent {
+  position: fixed;
+
+  display: none;
+  align-items: center;
+  justify-content: center;
+
+  inset: 0;
+  
+  background-color: var(--color-border);
+}
+
+.loader {
+  --size: 1px;
+
+  animation: rotate 1s infinite;
+  height: calc(50 * var(--size));
+  width: calc(50 * var(--size));
+}
+
+.loader:before,
+.loader:after {
+  border-radius: 50%;
+  content: "";
+  display: block;
+  height: calc(20 * var(--size));
+  width: calc(20 * var(--size));
+}
+.loader:before {
+  animation: ball1 1s infinite;
+  background-color: var(--color-text);
+  box-shadow: calc(30 * var(--size)) 0 0 var(--color-primary);
+  margin-bottom: calc(10 * var(--size));
+}
+.loader:after {
+  animation: ball2 1s infinite;
+  background-color: var(--color-primary);
+  box-shadow: calc(30 * var(--size)) 0 0 var(--color-text);
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg) scale(0.8);
+  }
+  50% {
+    transform: rotate(360deg) scale(1.2);
+  }
+  100% {
+    transform: rotate(720deg) scale(0.8);
+  }
+}
+
+@keyframes ball1 {
+  0% {
+    box-shadow: calc(30 * var(--size)) 0 0 var(--color-primary);
+  }
+  50% {
+    box-shadow: 0 0 0 var(--color-primary);
+    margin-bottom: 0;
+    transform: translate(calc(15 * var(--size)), calc(15 * var(--size)));
+  }
+  100% {
+    box-shadow: calc(30 * var(--size)) 0 0 var(--color-primary);
+    margin-bottom: calc(10 * var(--size));
+  }
+}
+
+@keyframes ball2 {
+  0% {
+    box-shadow: calc(30 * var(--size)) 0 0 var(--color-text);
+  }
+  50% {
+    box-shadow: 0 0 0 var(--color-text);
+    margin-top: calc(-20 * var(--size));
+    transform: translate(calc(15 * var(--size)), calc(15 * var(--size)));
+  }
+  100% {
+    box-shadow: calc(30 * var(--size)) 0 0 var(--color-text);
+    margin-top: 0;
+  }
 }
