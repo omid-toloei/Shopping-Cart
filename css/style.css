@@ -21,3 +21,79 @@ body {
 button {
   font: inherit;
 }
+
+/* =================================
+   Header
+================================= */
+
+.site-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  top: 0;
+  right: 0;
+  left: 0;
+
+  height: 72px;
+
+  border-bottom: 1px solid var(--color-border);
+}
+
+.header-elements-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  width: min(var(--container-width), calc(100% - 48px));
+  height: 100%;
+}
+
+.header-elements-container h1 {
+  font-size: 28px;
+}
+
+.header-elements-container button {
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+
+  position: relative;
+
+  transition: 0.2s;
+  cursor: pointer;
+}.header-elements-container button:hover {
+  background-color: var(--color-surface-hover);
+  border-color: #3b4250;
+}
+
+.header-elements-container button span {
+  background-color: var(--color-primary);
+  color: var(--color-text);
+
+  font-size: 10px;
+  font-weight: 700;
+
+  display: none;
+  align-items: center;
+  justify-content: center;
+
+  position: absolute;
+  top: -7px;
+  right: -7px;
+
+  height: 19px;
+  width: 19px;
+
+  border-radius: 50%;
+}
