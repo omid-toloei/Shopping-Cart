@@ -184,3 +184,35 @@ button {
     margin-top: 0;
   }
 }
+
+/* =================================
+  Main (show products and show error)
+================================= */
+
+main {
+  display: flex;
+  width: 100%;
+  min-height: calc(100vh - 72px);
+}
+
+.show-error-section {
+  display: none;
+  width: min(var(--container-width), calc(100% - 48px));
+}
+
+.show-error-section img {
+  width: 500px;
+  opacity: 0.7;
+}
+
+.show-error-section h3 {
+  margin-top: 20px;
+  font-size: 26px;
+  color: var(--color-text-secondary);
+}
+
+main, .show-error-section {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
