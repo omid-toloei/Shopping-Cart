@@ -1,19 +1,21 @@
 # Shopping Cart 🛒
 
-A simple shopping cart project built with HTML, CSS, and Vanilla JavaScript.
-
-<!-- ## 📖 About -->
+A simple shopping cart built with **HTML, CSS, and Vanilla JavaScript**.
 
 ## ✨ Features
 
-<!-- - [Feature 1]
-- [Feature 2]
-- [Feature 3] -->
+* Fetch products from an API
+* Product loading state
+* Error handling
+* Modern dark-themed UI
 
 ## 🛠️ Technologies
 
-- HTML5
-- CSS3
-- JavaScript
+* HTML5
+* CSS3
+* JavaScript
+* Fetch API
 
-<!-- ## 📸 Preview -->
+## 📌 Status
+
+This project is currently under development.
