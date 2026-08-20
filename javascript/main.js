@@ -14,12 +14,11 @@ const loaderParent = document.querySelector("#loaderParent");
 ================================= */
 
 let isLoading = false;
+let products = [];
 
 /* =================================
   Event Listeners
 ================================= */
-
-
 
 /* =================================
   API
@@ -51,8 +50,22 @@ async function request(url, options) {
   }
 }
 
+async function getProducts() {
+  try {
+    products = await request("https://dummyjson.com/products");
+  } catch (error) {
+    showError(error);
+  }
+}
+
 /* =================================
   Functions
+================================= */
+
+
+
+/* =================================
+  Render Functions
 ================================= */
 
 function showError(errorType) {
