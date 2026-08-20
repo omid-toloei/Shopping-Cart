@@ -9,6 +9,10 @@ const showErrorMessage = document.querySelector("#showErrorMessage");
 // Loader spinner
 const loaderParent = document.querySelector("#loaderParent");
 
+// Products
+const productsSection = document.querySelector(".products-section");
+
+
 /* =================================
   Global Variables
 ================================= */
@@ -52,7 +56,7 @@ async function request(url, options) {
 
 async function getProducts() {
   try {
-    products = await request("https://dummyjson.com/products");
+    products = await request("https://fakestoreapi.com/products");
   } catch (error) {
     showError(error);
   }
@@ -62,7 +66,12 @@ async function getProducts() {
   Functions
 ================================= */
 
+async function run() {
+  await getProducts();
+  showProducts(products);
+}
 
+run();
 
 /* =================================
   Render Functions
@@ -98,4 +107,28 @@ function showLoading(status) {
   } else {
     loaderParent.style.display = "none";
   }
+}
+
+function showProducts(array) {
+  let allProductsStructure = "";
+
+  array.forEach((object) => {
+    allProductsStructure += `<article class="product-card">
+          <img src="${object.image}" alt="${object.title}" class="product-card__image">
+          <div class="product-info-card">
+            <h2 class="product-card__title">${object.title}</h2>
+            <p class="product-card__description">${object.description}</p>
+            <div class="product-card__footer">
+              <span class="product-card__price">$${object.price}</span>
+              <div class="quantity-control">
+                <button class="quantity-control__btn"> - </button>
+                <span class="quantity-control__value"> 1 </span>
+                <button class="quantity-control__btn"> + </button>
+              </div>
+            </div>
+          </div>
+        </article>`;
+  });
+
+  productsSection.innerHTML = allProductsStructure;
 }
