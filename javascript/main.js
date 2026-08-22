@@ -56,7 +56,8 @@ async function request(url, options) {
 
 async function getProducts() {
   try {
-    products = await request("https://fakestoreapi.com/products");
+    const productsWithoutQuantity = await request("https://fakestoreapi.com/products");
+    products = setQuantity(productsWithoutQuantity);
   } catch (error) {
     showError(error);
   }
@@ -65,6 +66,25 @@ async function getProducts() {
 /* =================================
   Functions
 ================================= */
+
+function setQuantity(array) {
+  const getLocalStorageData = JSON.parse(localStorage.getItem("shoppingCart")) || [];
+
+  let newProducts = array.map((object) => {
+    if(getLocalStorageData.some((element) => element.id === object.id)) {
+
+      let localStorageElement = getLocalStorageData.filter((element) => element.id === object.id);
+      object.quantity = localStorageElement[0].quantity;
+      return object;
+
+    } else {
+      object.quantity = 0;
+      return object;
+    }
+  });
+
+  return newProducts;
+}
 
 async function run() {
   await getProducts();
@@ -95,6 +115,7 @@ function showError(errorType) {
       break;
     default:
       errorMessage = "Something went wrong";
+      console.log(errorType);
   }
 
   showErrorSection.style.display = "flex";
@@ -122,7 +143,7 @@ function showProducts(array) {
               <span class="product-card__price">$${object.price}</span>
               <div class="quantity-control">
                 <button class="quantity-control__btn"> - </button>
-                <span class="quantity-control__value"> 1 </span>
+                <span class="quantity-control__value"> 0 </span>
                 <button class="quantity-control__btn"> + </button>
               </div>
             </div>
