@@ -12,7 +12,7 @@ const loaderParent = document.querySelector("#loaderParent");
 // Products
 const productsSection = document.querySelector(".products-section");
 const productCard = document.querySelector(".product-card");
-
+const quantityControlValue = document.querySelector(".quantity-control__value");
 
 /* =================================
   Global Variables
@@ -27,17 +27,17 @@ let products = [];
 
 productsSection.addEventListener("click", (event) => {
   const buttonTarget = event.target.closest("button");
-  if(!buttonTarget) return;
+  if (!buttonTarget) return;
 
   const productCardTarget = event.target.closest(".product-card");
-  if(!productCardTarget) return;
+  if (!productCardTarget) return;
 
-  if(buttonTarget.classList.contains("quantity-plus")) {
-    console.log(`quantity-plus: ${productCardTarget.dataset.productId}`);
+  if (buttonTarget.classList.contains("quantity-plus")) {
+    plusProductQuantity(productCardTarget.dataset.productId);
   }
 
-  if(buttonTarget.classList.contains("quantity-minus")) {
-    console.log(`quantity-minus: ${productCardTarget.dataset.productId}`);
+  if (buttonTarget.classList.contains("quantity-minus")) {
+    // minusProductQuantity(productCardTarget.dataset.productId);
   }
 });
 
@@ -73,7 +73,9 @@ async function request(url, options) {
 
 async function getProducts() {
   try {
-    const productsWithoutQuantity = await request("https://fakestoreapi.com/products");
+    const productsWithoutQuantity = await request(
+      "https://fakestoreapi.com/products",
+    );
     products = setQuantity(productsWithoutQuantity);
   } catch (error) {
     showError(error);
@@ -85,15 +87,16 @@ async function getProducts() {
 ================================= */
 
 function setQuantity(array) {
-  const getLocalStorageData = JSON.parse(localStorage.getItem("shoppingCart")) || [];
+  const getLocalStorageData =
+    JSON.parse(localStorage.getItem("shoppingCart")) || [];
 
   let newProducts = array.map((object) => {
-    if(getLocalStorageData.some((element) => element.id === object.id)) {
-
-      let localStorageElement = getLocalStorageData.filter((element) => element.id === object.id);
+    if (getLocalStorageData.some((element) => element.id === object.id)) {
+      let localStorageElement = getLocalStorageData.filter(
+        (element) => element.id === object.id,
+      );
       object.quantity = localStorageElement[0].quantity;
       return object;
-
     } else {
       object.quantity = 0;
       return object;
@@ -101,6 +104,35 @@ function setQuantity(array) {
   });
 
   return newProducts;
+}
+
+function plusProductQuantity(productIdString) {
+  const productId = Number(productIdString);
+
+  // Change "products" array
+  let productIndex = products.findIndex((object) => object.id === productId);
+  products[productIndex].quantity++;
+
+  // Change local storage
+  let getLocalStorageData = JSON.parse(localStorage.getItem("shoppingCart")) || [];
+
+  if (getLocalStorageData.some((element) => element.id === productId)) {
+    let localStorageElement = getLocalStorageData.filter(element => element.id === productId);
+    localStorageElement.quantity = products[productIndex].quantity;
+
+  } else {
+
+    let localStorageElement = {
+      id: productId,
+      quantity: products[productIndex].quantity
+    }
+    getLocalStorageData.push(localStorageElement);
+  }
+
+  localStorage.setItem("shoppingCart", JSON.stringify(getLocalStorageData));
+
+  // Change UI
+  showProducts(products);
 }
 
 async function run() {
