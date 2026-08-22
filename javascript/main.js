@@ -11,6 +11,7 @@ const loaderParent = document.querySelector("#loaderParent");
 
 // Products
 const productsSection = document.querySelector(".products-section");
+const productCard = document.querySelector(".product-card");
 
 
 /* =================================
@@ -23,6 +24,22 @@ let products = [];
 /* =================================
   Event Listeners
 ================================= */
+
+productsSection.addEventListener("click", (event) => {
+  const buttonTarget = event.target.closest("button");
+  if(!buttonTarget) return;
+
+  const productCardTarget = event.target.closest(".product-card");
+  if(!productCardTarget) return;
+
+  if(buttonTarget.classList.contains("quantity-plus")) {
+    console.log(`quantity-plus: ${productCardTarget.dataset.productId}`);
+  }
+
+  if(buttonTarget.classList.contains("quantity-minus")) {
+    console.log(`quantity-minus: ${productCardTarget.dataset.productId}`);
+  }
+});
 
 /* =================================
   API
@@ -134,7 +151,7 @@ function showProducts(array) {
   let allProductsStructure = "";
 
   array.forEach((object) => {
-    allProductsStructure += `<article class="product-card">
+    allProductsStructure += `<article class="product-card" data-product-id="${object.id}">
           <img src="${object.image}" alt="${object.title}" class="product-card__image">
           <div class="product-info-card">
             <h2 class="product-card__title">${object.title}</h2>
@@ -142,9 +159,9 @@ function showProducts(array) {
             <div class="product-card__footer">
               <span class="product-card__price">$${object.price}</span>
               <div class="quantity-control">
-                <button class="quantity-control__btn"> - </button>
-                <span class="quantity-control__value"> 0 </span>
-                <button class="quantity-control__btn"> + </button>
+                <button class="quantity-control__btn quantity-minus"> - </button>
+                <span class="quantity-control__value"> ${object.quantity} </span>
+                <button class="quantity-control__btn quantity-plus"> + </button>
               </div>
             </div>
           </div>
