@@ -83,7 +83,7 @@ button {
   border-color: #3b4250;
 }
 
-.header-elements-container button span {
+#cartBadge {
   background-color: var(--color-primary);
   color: var(--color-text);
 
