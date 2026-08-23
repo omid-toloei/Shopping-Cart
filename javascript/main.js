@@ -159,7 +159,12 @@ function minusProductQuantity(productIdString) {
 
   }
 
-  localStorage.setItem("shoppingCart", JSON.stringify(getLocalStorageData));
+  if(getLocalStorageData.length == 0) {
+    localStorage.removeItem("shoppingCart");
+  } else {
+    localStorage.setItem("shoppingCart", JSON.stringify(getLocalStorageData));
+  }
+  
 
   // Change UI
   showProducts(products);
