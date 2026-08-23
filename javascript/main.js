@@ -37,7 +37,7 @@ productsSection.addEventListener("click", (event) => {
   }
 
   if (buttonTarget.classList.contains("quantity-minus")) {
-    // minusProductQuantity(productCardTarget.dataset.productId);
+    minusProductQuantity(productCardTarget.dataset.productId);
   }
 });
 
@@ -118,15 +118,45 @@ function plusProductQuantity(productIdString) {
 
   if (getLocalStorageData.some((element) => element.id === productId)) {
     let localStorageElement = getLocalStorageData.filter(element => element.id === productId);
-    localStorageElement.quantity = products[productIndex].quantity;
-
+    localStorageElement[0].quantity = products[productIndex].quantity;
   } else {
-
     let localStorageElement = {
       id: productId,
       quantity: products[productIndex].quantity
     }
     getLocalStorageData.push(localStorageElement);
+  }
+
+  localStorage.setItem("shoppingCart", JSON.stringify(getLocalStorageData));
+
+  // Change UI
+  showProducts(products);
+}
+
+function minusProductQuantity(productIdString) {
+  const productId = Number(productIdString);
+
+  // Change "products" array
+  let productIndex = products.findIndex((object) => object.id === productId);
+
+  if(products[productIndex].quantity === 0) return;
+  products[productIndex].quantity--;
+
+  // Change local storage
+  let getLocalStorageData = JSON.parse(localStorage.getItem("shoppingCart")) || [];
+
+  if (getLocalStorageData.some((element) => element.id === productId)) {
+    let localStorageElement = getLocalStorageData.filter(
+      (element) => element.id === productId,
+    );
+
+    if(products[productIndex].quantity === 0) {
+      let elementIndex = getLocalStorageData.findIndex(element => element.id === productId);
+      getLocalStorageData.splice(elementIndex, 1);
+    } else {
+      localStorageElement[0].quantity = products[productIndex].quantity;
+    }
+
   }
 
   localStorage.setItem("shoppingCart", JSON.stringify(getLocalStorageData));
