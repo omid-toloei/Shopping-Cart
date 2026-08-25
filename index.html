@@ -16,7 +16,8 @@
 
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/variables.css" />
-  </head>
+  </head> 
+
   <body>
     <!-- =================================
       Header 
@@ -25,7 +26,7 @@
     <header class="site-header">
       <div class="header-elements-container">
         <h1>Products</h1>
-        <button>
+        <button id="openCartModalBtn">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -70,6 +71,48 @@
     <main>
       <section class="products-section"></section>
     </main>
+
+    <!-- =================================
+      Shopping Cart Modal
+    ================================= -->
+
+    <div class="cart-modal" id="cartModal">
+      <div class="cart-modal__overlay"></div>
+      <section class="cart-modal__dialog">
+        <header class="cart-modal__header">
+          <h2>Shopping Cart</h2>
+          <button class="cart-modal__close-btn" id="closeCartModalBtn"> × </button>
+        </header>
+        <div class="cart-modal__items">
+
+          <!-- <article class="cart-item">
+            <img src="assets/images/error-img.png" class="cart-item__image">
+            <div class="cart-item__details">
+              <h2 class="cart-item__title">Iphone 14 promax</h2>
+              <span class="cart-item__unit-price">$400</span>
+            </div>
+            <div class="cart-item__quantity quantity-control">
+                <button class="quantity-control__btn"> - </button>
+                <span class="quantity-control__value"> 0 </span>
+                <button class="quantity-control__btn"> + </button>
+            </div>
+            <strong class="cart-item__total">$892</strong>
+          </article> -->
+          <div class="cart-modal-empty">
+            <span>You have no products in your shopping cart <img src="assets/icons/shopping-cart-empty.png"></span>
+          </div>
+
+        </div>
+
+        <footer class="cart-modal__footer">
+          <div class="cart-summary">
+            <span>Total</span>
+            <strong class="cart-summary__price" id="cartModalPrice">$0</strong>
+          </div>
+          <button class="cart-modal__checkout" id="checkoutBtn">Place Order</button>
+        </footer>
+      </section>
+    </div>
 
     <script src="javascript/main.js"></script>
   </body>

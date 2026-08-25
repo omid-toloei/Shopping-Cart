@@ -16,6 +16,12 @@ const quantityControlValue = document.querySelector(".quantity-control__value");
 
 // Shopping Cart
 const cartBadge = document.querySelector("#cartBadge");
+const openCartModalBtn = document.querySelector("#openCartModalBtn");
+const closeCartModalBtn = document.querySelector("#closeCartModalBtn");
+
+// Shopping Cart Modal
+const cartModal = document.querySelector("#cartModal");
+
 
 /* =================================
   Global Variables
@@ -44,6 +50,14 @@ productsSection.addEventListener("click", (event) => {
     minusProductQuantity(productCardTarget.dataset.productId);
     updateCartBadge();
   }
+});
+
+closeCartModalBtn.addEventListener("click", () => {
+  cartModal.style.display = "none";
+});
+
+openCartModalBtn.addEventListener("click", () => {
+  cartModal.style.display = "flex";
 });
 
 /* =================================
