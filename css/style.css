@@ -447,7 +447,7 @@ main {
 }
 
 .cart-item__details {
-  flex: 1;
+  width: 450px;
 }
 
 .cart-item__title {

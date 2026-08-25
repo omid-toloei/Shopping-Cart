@@ -21,6 +21,7 @@ const closeCartModalBtn = document.querySelector("#closeCartModalBtn");
 
 // Shopping Cart Modal
 const cartModal = document.querySelector("#cartModal");
+const cartModalItems = document.querySelector("#cartModalItems");
 
 
 /* =================================
@@ -150,6 +151,7 @@ function plusProductQuantity(productIdString) {
 
   // Change UI
   showProducts(products);
+  renderShoppingCart();
 }
 
 function minusProductQuantity(productIdString) {
@@ -187,6 +189,7 @@ function minusProductQuantity(productIdString) {
 
   // Change UI
   showProducts(products);
+  renderShoppingCart();
 }
 
 function updateCartBadge() {
@@ -201,9 +204,28 @@ function updateCartBadge() {
   }
 }
 
+function getCartItems() {
+  const shoppingCartItems = products.filter(product => product.quantity > 0);
+
+  if(shoppingCartItems.length === 0) {
+    return "EMPTY_SHOPPING_CART";
+  } else {
+    return shoppingCartItems;
+  }
+  
+}
+
+function showEmptyCartError() {
+  cartModalItems.innerHTML = `<div class="cart-modal-empty">
+            <span>You have no products in your shopping cart <img src="assets/icons/shopping-cart-empty.png"></span>
+          </div>`;
+}
+
 async function run() {
   await getProducts();
   showProducts(products);
+  renderShoppingCart();
+  updateCartBadge();
 }
 
 run();
@@ -267,4 +289,31 @@ function showProducts(array) {
   });
 
   productsSection.innerHTML = allProductsStructure;
+}
+
+function renderShoppingCart() {
+  const cartItemsArray = getCartItems();
+  if(cartItemsArray === "EMPTY_SHOPPING_CART") {
+    showEmptyCartError();
+    return;
+  }
+  
+  let cartItemsStructure = "";
+  cartItemsArray.forEach((product) => {
+    cartItemsStructure += `<article class="cart-item">
+            <img src="${product.image}" class="cart-item__image">
+            <div class="cart-item__details">
+              <h2 class="cart-item__title">${product.title}</h2>
+              <span class="cart-item__unit-price">$${product.price}</span>
+            </div>
+            <div class="cart-item__quantity quantity-control">
+                <button class="quantity-control__btn"> - </button>
+                <span class="quantity-control__value"> ${product.quantity} </span>
+                <button class="quantity-control__btn"> + </button>
+            </div>
+            <strong class="cart-item__total">$${product.price * product.quantity}</strong>
+          </article>`;
+  });
+
+  cartModalItems.innerHTML = cartItemsStructure;
 }
