@@ -7,6 +7,7 @@ A simple shopping cart built with **HTML, CSS, and Vanilla JavaScript**.
 * Fetch products from an API and show them
 * Plus or minus products quantity
 * Save in local storage
+* Show in shopping cart
 * Product loading state
 * Error handling
 * Modern dark-themed UI
