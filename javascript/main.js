@@ -61,6 +61,24 @@ openCartModalBtn.addEventListener("click", () => {
   cartModal.style.display = "flex";
 });
 
+cartModalItems.addEventListener("click", (event) => {
+  const buttonTarget = event.target.closest("button");
+  if(!buttonTarget) return;
+
+  const articleTarget = event.target.closest("article");
+  if(!articleTarget) return;
+
+  if(buttonTarget.classList.contains("plus-product-cart-quantity")) {
+    plusProductQuantity(articleTarget.dataset.productId);
+    updateCartBadge();
+  }
+
+  if(buttonTarget.classList.contains("minus-product-cart-quantity")) {
+    minusProductQuantity(articleTarget.dataset.productId);
+    updateCartBadge();
+  }
+});
+
 /* =================================
   API
 ================================= */
@@ -300,16 +318,16 @@ function renderShoppingCart() {
   
   let cartItemsStructure = "";
   cartItemsArray.forEach((product) => {
-    cartItemsStructure += `<article class="cart-item">
+    cartItemsStructure += `<article class="cart-item" data-product-id="${product.id}">
             <img src="${product.image}" class="cart-item__image">
             <div class="cart-item__details">
               <h2 class="cart-item__title">${product.title}</h2>
               <span class="cart-item__unit-price">$${product.price}</span>
             </div>
             <div class="cart-item__quantity quantity-control">
-                <button class="quantity-control__btn"> - </button>
+                <button class="quantity-control__btn minus-product-cart-quantity"> - </button>
                 <span class="quantity-control__value"> ${product.quantity} </span>
-                <button class="quantity-control__btn"> + </button>
+                <button class="quantity-control__btn plus-product-cart-quantity"> + </button>
             </div>
             <strong class="cart-item__total">$${product.price * product.quantity}</strong>
           </article>`;
