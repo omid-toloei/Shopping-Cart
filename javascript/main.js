@@ -22,6 +22,7 @@ const closeCartModalBtn = document.querySelector("#closeCartModalBtn");
 // Shopping Cart Modal
 const cartModal = document.querySelector("#cartModal");
 const cartModalItems = document.querySelector("#cartModalItems");
+const cartModalPrice = document.querySelector("#cartModalPrice");
 
 
 /* =================================
@@ -170,6 +171,7 @@ function plusProductQuantity(productIdString) {
   // Change UI
   showProducts(products);
   renderShoppingCart();
+  calculateTotalCart();
 }
 
 function minusProductQuantity(productIdString) {
@@ -208,6 +210,7 @@ function minusProductQuantity(productIdString) {
   // Change UI
   showProducts(products);
   renderShoppingCart();
+  calculateTotalCart();
 }
 
 function updateCartBadge() {
@@ -239,10 +242,29 @@ function showEmptyCartError() {
           </div>`;
 }
 
+function calculateTotalCart() {
+  let purchases = [];
+  let totalPrice = 0;
+
+  products.forEach((product) => {
+    if(product.quantity > 0) {
+      let price = Number((product.price * product.quantity).toFixed(2));
+      purchases.push(price);
+    }
+  });
+  
+  purchases.forEach((price) => {
+    totalPrice += price;
+  });
+
+  cartModalPrice.innerHTML = `$${totalPrice}`;
+}
+
 async function run() {
   await getProducts();
   showProducts(products);
   renderShoppingCart();
+  calculateTotalCart();
   updateCartBadge();
 }
 
@@ -329,7 +351,7 @@ function renderShoppingCart() {
                 <span class="quantity-control__value"> ${product.quantity} </span>
                 <button class="quantity-control__btn plus-product-cart-quantity"> + </button>
             </div>
-            <strong class="cart-item__total">$${product.price * product.quantity}</strong>
+            <strong class="cart-item__total">$${Number((product.price * product.quantity).toFixed(2))}</strong>
           </article>`;
   });
 
