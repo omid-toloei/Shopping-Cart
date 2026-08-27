@@ -60,7 +60,7 @@ button {
   font-size: 28px;
 }
 
-.header-elements-container button {
+.open-cart-modal-btn {
   width: 42px;
   height: 42px;
 
@@ -78,7 +78,7 @@ button {
   transition: 0.2s;
   cursor: pointer;
 }
-.header-elements-container button:hover {
+.open-cart-modal-btn:hover {
   background-color: var(--color-surface-hover);
   border-color: #3b4250;
 }
@@ -102,6 +102,31 @@ button {
   width: 19px;
 
   border-radius: 50%;
+}
+
+/* Header Search Box */
+
+.search-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 20px;
+}
+
+.search-box__input {
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  outline: none;
+  font-size: 18px;
+  padding: 8px 20px;
+  width: 500px;
+  transition: padding-left 0.2s;
+}
+
+.search-box__input:hover, .search-box__input:focus {
+  padding-left: 30px;
 }
 
 /* =================================

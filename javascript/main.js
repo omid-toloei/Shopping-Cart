@@ -24,6 +24,9 @@ const cartModal = document.querySelector("#cartModal");
 const cartModalItems = document.querySelector("#cartModalItems");
 const cartModalPrice = document.querySelector("#cartModalPrice");
 
+// Search Box
+const searchBoxInput = document.querySelector("#searchBoxInput");
+
 
 /* =================================
   Global Variables
@@ -78,6 +81,10 @@ cartModalItems.addEventListener("click", (event) => {
     minusProductQuantity(articleTarget.dataset.productId);
     updateCartBadge();
   }
+});
+
+searchBoxInput.addEventListener("keyup", () => {
+  searchProduct();
 });
 
 /* =================================
@@ -258,6 +265,18 @@ function calculateTotalCart() {
   });
 
   cartModalPrice.innerHTML = `$${totalPrice}`;
+}
+
+function searchProduct() {
+  let searchInputValue = searchBoxInput.value;
+
+  if(searchInputValue === "") {
+    showProducts(products);
+    return;
+  };
+  
+  let searchResult = products.filter(product => product.title.includes(searchInputValue));
+  showProducts(searchResult);
 }
 
 async function run() {
