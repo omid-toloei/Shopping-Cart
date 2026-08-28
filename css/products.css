@@ -1,0 +1,131 @@
+/* =================================
+  Products
+================================= */
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+
+  margin-top: 28px;
+
+  width: min(var(--container-width), calc(100% - 48px));
+  flex: 1;
+
+  padding: 10px 0 64px 0;
+}
+
+.products-section {
+  display: flex;
+  align-items: start;
+  justify-content: start;
+
+  gap: 20px;
+  flex-wrap: wrap;
+
+  width: 100%;
+  height: 100%;
+}
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+  width: calc(calc(100% - 80px) / 5);
+  min-width: 215px;
+
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+
+.product-card__image {
+  width: 100%;
+  height: 220px;
+  background-color: var(--color-product-img);
+  object-fit: contain;
+  border-bottom: 1px solid var(--color-border);
+
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  padding: 16px;
+}
+
+.product-info-card {
+  padding: 16px;
+  background-color: var(--color-surface);
+}
+
+.product-card__title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 7px;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.product-card__description {
+  margin-bottom: 17px;
+
+  overflow: hidden;
+
+  color: var(--color-text-secondary);
+  font-size: 12px;
+  line-height: 21px;
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.product-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.product-card__price {
+  color: var(--color-text);
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.quantity-control {
+  height: 32px;
+  display: flex;
+  align-items: center;
+
+  background-color: var(--color-background);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+}
+
+.quantity-control__btn {
+  border: none;
+  color: var(--color-text);
+  background-color: transparent;
+
+  width: 30px;
+  height: 30px;
+  font-size: 17px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.quantity-control__btn:hover {
+  background-color: var(--color-surface-hover);
+  color: var(--color-primary);
+  border-radius: var(--radius-sm);
+}
+
+.quantity-control__value {
+  font-size: 12px;
+  width: 25px;
+  text-align: center;
+  font-weight: 600;
+}
