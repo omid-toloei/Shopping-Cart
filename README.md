@@ -20,7 +20,3 @@ A simple shopping cart built with **HTML, CSS, and Vanilla JavaScript**.
 * CSS3
 * JavaScript
 * Fetch API
-
-## 📌 Status
-
-This project is currently under development.
