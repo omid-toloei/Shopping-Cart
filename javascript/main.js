@@ -176,7 +176,10 @@ function plusProductQuantity(productIdString) {
   localStorage.setItem("shoppingCart", JSON.stringify(getLocalStorageData));
 
   // Change UI
-  showProducts(products);
+  const productArticle = document.querySelector(`article[data-product-id="${productId}"]`);
+  const quantityTag = productArticle.querySelector(".quantity-control__value");
+  quantityTag.textContent++;
+
   renderShoppingCart();
   calculateTotalCart();
 }
@@ -215,7 +218,10 @@ function minusProductQuantity(productIdString) {
   
 
   // Change UI
-  showProducts(products);
+  const productArticle = document.querySelector(`article[data-product-id="${productId}"]`);
+  const quantityTag = productArticle.querySelector(".quantity-control__value");
+  quantityTag.textContent--;
+
   renderShoppingCart();
   calculateTotalCart();
 }
