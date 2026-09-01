@@ -270,7 +270,7 @@ function calculateTotalCart() {
     totalPrice += price;
   });
 
-  cartModalPrice.innerHTML = `$${totalPrice}`;
+  cartModalPrice.innerHTML = `$${totalPrice.toFixed(2)}`;
 }
 
 function searchProduct() {
